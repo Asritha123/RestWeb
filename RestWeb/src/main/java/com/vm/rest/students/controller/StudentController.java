@@ -3,6 +3,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,25 +20,37 @@ public class StudentController {
 	@Autowired
 	StudentService studentService;
 	
-	@RequestMapping("students")
-	public List<Student> getStudents(){   //fetching all resources
-		
-		return studentService.getStudents();
-		
+	/*
+	 * @RequestMapping("/") public List<Student> getStudents(){ //fetching all
+	 * resources
+	 * 
+	 * return studentService.getStudents();
+	 * 
+	 * }
+	 * 
+	 * @RequestMapping("/students/{id}") public Student getStudent(@PathVariable int
+	 * id) { //getting a particular resource return studentService.getStudent(id); }
+	 * 
+	 * @RequestMapping(method = RequestMethod.POST, value ="students") //create a
+	 * resource public void addStudent(@RequestBody Student student) {
+	 * System.out.println("controllers add student");
+	 * studentService.addStudent(student); }
+	 * 
+	 * @RequestMapping(method = RequestMethod.DELETE, value = "students/{id}")
+	 * public void deleteStudent(@PathVariable int id, Student student) {
+	 * studentService.updateStudent(student, id); }
+	 */
+	@GetMapping("/")
+	public String home() {
+		return ("<h1>home</h1>");
 	}
-	@RequestMapping("/students/{id}")   
-	public Student getStudent(@PathVariable int id) {  //getting a particular resource
-		return  studentService.getStudent(id);
+	@GetMapping("/admin")
+	public String admin() {
+		return ("<h1>user</h1>");
 	}
-	
-	@RequestMapping(method = RequestMethod.POST, value ="students") //create a resource
-	public void addStudent(@RequestBody Student student) {
-		System.out.println("controllers add student");
-		studentService.addStudent(student);
-	}
-	@RequestMapping(method =  RequestMethod.DELETE, value = "students/{id}")
-	public void  deleteStudent(@PathVariable int id, Student student) {
-		studentService.updateStudent(student, id);
+	@GetMapping("/user")
+	public String user() {
+		return ("<h1>admin</h1>");
 	}
 
 
